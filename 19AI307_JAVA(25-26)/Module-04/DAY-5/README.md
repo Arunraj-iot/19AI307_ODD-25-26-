@@ -31,8 +31,8 @@ Close the scanner.
  ```
 /*
 Program to implement a Synchronization concept using Java
-Developed by: AADHITHYAA L
-RegisterNumber: 212224220003
+Developed by: ARUNRAJ R
+RegisterNumber: 212224110006
 */
 ```
 
