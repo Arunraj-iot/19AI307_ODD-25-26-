@@ -1,72 +1,67 @@
 # Ex.No:3(E) INNER CLASS
 
 ## QUESTION:
-
-Write a Java program to define an enum named GameLevel with three constants: EASY, MEDIUM, and HARD.
-
+Write a Java program to create an inner class and access it from the outer class.
 
 ## AIM:
-
-To write a Java program that defines an enum named GameLevel with constants EASY, MEDIUM, and HARD, and allows the user to select a game level
+To demonstrate accessing an inner class from an outer class in Java.
 
 ## ALGORITHM :
-
-Define an enum GameLevel with constants: EASY, MEDIUM, HARD.
-
-Read user input as a string and convert it to uppercase.
-
-Use GameLevel.valueOf() to match the input with an enum constant.
-
-If the value matches, print the selected game level.
-
-If no match is found, catch IllegalArgumentException and show an error message.
-
-Close the scanner in the finally block.
-
-
+1.	Create an outer class with a private variable.
+2.	Define an inner class inside it with a method to access the outer variable.
+3.	In main(), create an object of the outer class.
+4.	Use it to create an object of the inner class.
+5.	Call the inner class method.
 
 
 ## PROGRAM:
  ```
-/*
 Program to implement a InnerClass using Java
 Developed by: ARUNRAJ R
 RegisterNumber: 212224110006
-*/
 ```
 
-## SOURCE CODE:
 
-    
-    import java.util.Scanner;
-    
-    enum GameLevel {
-        EASY, MEDIUM, HARD;
+### SOURCE CODE:
+```java
+import java.util.Scanner;
+
+class OuterClass {
+    String name;
+
+    OuterClass(String name) {
+        this.name = name;
     }
-    
-    public class Game {
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-            String userInput = scanner.nextLine().toUpperCase();
-    
-            try {
-                GameLevel level = GameLevel.valueOf(userInput);
-                System.out.println("You selected game level: " + level);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid game level entered.");
-            } finally {
-                scanner.close();
-            }
+
+    void display() {
+        InnerClass inner = new InnerClass();
+        inner.showMessage();
+    }
+
+    class InnerClass {
+        void showMessage() {
+            System.out.println("Hello, " + name + "! This message is from the Inner Class.");
         }
     }
+}
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("");
+        String input = scanner.next();
+        scanner.close();
 
+        OuterClass outer = new OuterClass(input);
+        outer.display();
+    }
+}
+```
 
 ## OUTPUT:
 
-<img width="848" height="312" alt="image" src="https://github.com/user-attachments/assets/e6053d44-f1f9-414a-99ad-7ab3f6172696" />
-
+<img width="1223" height="347" alt="image" src="https://github.com/user-attachments/assets/3a4a3b07-7cc7-4e68-877e-4bb04d3aab6d" />
 
 ## RESULT:
-Therefore the program successfully reads a game level from the user and maps it to the corresponding enum constant.
 
+The program successfully accesses and prints data from the inner class using the outer class.
