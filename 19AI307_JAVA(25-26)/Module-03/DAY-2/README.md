@@ -1,23 +1,38 @@
-# Ex.No:3(b) POLYMORPHISM
+# Ex.No:3(C) ABSTRACTION
 
 ## QUESTION:
-Write a Java program to create a class Vehicle with a method called speedUp(). Create two subclasses Car and Bicycle. Override the speedUp() method in each subclass to increase the vehicle's speed differently.
+In a secret intelligence facility, encrypted messages are stored as arrays of characters. Each type of agent has a different way to decode these messages. Define an abstract class Decoder with a method decodeMessage(String[] fragments).
+There are two types of agents:
+
+   AlphaAgent: Extracts a meaningful string by rearranging the fragments based on even indices first, then odd indices, and then reversing the final result.
+
+   BetaAgent: Picks all fragments that start and end with the same letter, joins them with -, and removes all vowels from the resulting string.
+
 
 ## AIM:
-To create a Java program demonstrating method overriding by defining a base class Vehicle with a speedUp() method and overriding it in subclasses Car and Bicycle to increase speed differently.
+To create an abstract class Decoder with an abstract method decodeMessage(), and implement two subclasses, AlphaAgent and BetaAgent, each with a unique decoding technique for encrypted message fragments.
 
 ## ALGORITHM :
-1. Create a parent class Vehicle with an integer variable speed and a method speedUp(int increment) that increases speed normally.
+1. Create an abstract class Decoder containing an abstract method decodeMessage(String[] fragments).
 
-2. Create a subclass Car that overrides speedUp() to increase speed by double the increment.
+2. Create subclass AlphaAgent implementing decodeMessage() by collecting fragments at even indices,then collecting fragments at odd indices,reversing the combined list.
 
-3. Create a subclass Bicycle that overrides speedUp() to increase speed normally (same as parent but customized message).
+3. Joining all fragments into one decoded string.
 
-4. Read vehicle type and increment value from user.
+4. Create subclass BetaAgent implementing decodeMessage() by selecting fragments whose first and last characters match (case-insensitive).
 
-5. Based on the type, create an object of Car, Bicycle, or Vehicle.
+5. Joining selected fragments using -.
 
-6. Call the speedUp(increment) method to show polymorphic behavior.
+6. Removing all vowels from the final combined string.
+
+7. Read number of fragments and store them in a string array.
+
+8. Read agent type (1 = AlphaAgent, 2 = BetaAgent).
+
+9. Create the corresponding agent object.
+
+10. Call decodeMessage() and print the decoded output.
+
 
 
 
@@ -25,77 +40,98 @@ To create a Java program demonstrating method overriding by defining a base clas
 ## PROGRAM:
  ```
 /*
-Program to implement a Polymorphism using Java
+Program to implement a Abstraction using Java
 Developed by: ARUNRAJ R
 RegisterNumber: 212224110006
 */
 ```
 
 ## SOURCE CODE:
+
 ```
-import java.util.Scanner;
+import java.util.*;
 
-// Parent class
-class Vehicle {
-    int speed = 0;
-
-    void speedUp(int increment) {
-        speed += increment;
-        System.out.println("Vehicle speed increased to: " + speed + " km/h");
-    }
+abstract class Decoder {
+    abstract String decodeMessage(String[] fragments);
 }
 
 
-class Car extends Vehicle {
+class AlphaAgent extends Decoder {
     @Override
-    void speedUp(int increment) {
-        speed += increment * 2;
-        System.out.println("Car speed increased to: " + speed + " km/h");
+    String decodeMessage(String[] fragments) {
+        List<String> ordered = new ArrayList<>();
+        
+        for (int i = 0; i < fragments.length; i += 2) {
+            ordered.add(fragments[i]);
+        }
+       
+        for (int i = 1; i < fragments.length; i += 2) {
+            ordered.add(fragments[i]);
+        }
+       
+        Collections.reverse(ordered);
+        
+        StringBuilder result = new StringBuilder();
+        for (String s : ordered) {
+            result.append(s);
+        }
+        return result.toString();
     }
 }
 
 
-class Bicycle extends Vehicle {
+class BetaAgent extends Decoder {
     @Override
-    void speedUp(int increment) {
-        speed += increment;
-        System.out.println("Bicycle speed increased to: " + speed + " km/h");
-    }
-}
-
-
-public class TestVehicles {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String type = sc.nextLine().toLowerCase();
-        int increment = sc.nextInt();
-
-        Vehicle vehicle;
-        if (type.equals("car")) {
-            vehicle = new Car();
-        } else if (type.equals("bicycle")) {
-            vehicle = new Bicycle();
-        } else {
-            vehicle = new Vehicle();
+    String decodeMessage(String[] fragments) {
+        List<String> selected = new ArrayList<>();
+        for (String f : fragments) {
+            if (!f.isEmpty()) {
+                char first = Character.toLowerCase(f.charAt(0));
+                char last = Character.toLowerCase(f.charAt(f.length() - 1));
+                if (first == last) {
+                    selected.add(f);
+                }
+            }
         }
 
-        vehicle.speedUp(increment);
+        String joined = String.join("-", selected);
+        return joined.replaceAll("[AEIOUaeiou]", "");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine().trim());
+        String[] fragments = new String[n];
+        for (int i = 0; i < n; i++) {
+            fragments[i] = sc.nextLine().trim();
+        }
+        int type = Integer.parseInt(sc.nextLine().trim());
+
+        Decoder agent;
+        if (type == 1)
+            agent = new AlphaAgent();
+        else
+            agent = new BetaAgent();
+
+        System.out.println(agent.decodeMessage(fragments));
+        sc.close();
     }
 }
 ```
-
 
 
 
 
 
 ## OUTPUT:
-<img width="921" height="437" alt="image" src="https://github.com/user-attachments/assets/5c317382-efe2-4ec9-a2cf-67b2d4db68b4" />
+<img width="791" height="586" alt="image" src="https://github.com/user-attachments/assets/8e5ac67e-a125-4db4-b804-52e16025fa7e" />
 
 
 
 ## RESULT:
-Therefore the  program successfully demonstrates method overriding by applying different speed increase behaviors for car and bicycle.
+Therefore the program successfully decodes messages using the rules defined for AlphaAgent and BetaAgent.
 
 
 
