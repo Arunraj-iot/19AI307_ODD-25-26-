@@ -1,34 +1,38 @@
 # Ex.No:3(D)    INTERFACE 
 
 ## QUESTION:
-
 You’re developing a multi-console gaming platform that supports different controllers. Each controller has its own way of mapping buttons for actions like Jump, Shoot, and Pause.
 
 To unify this behavior, you're asked to design a system using Java Interfaces. The interface will standardize the controls, and each controller will implement them differently.
 
-Your Task: Create an interface GameController with methods:
+Your Task:
+Create an interface GameController with methods:
 
-jump() shoot() pause() Implement three controller types:
+jump()
+shoot()
+pause()
+Implement three controller types:
 
-PlayBoxController XCubeController RetroFunController
+PlayBoxController
+XCubeController
+RetroFunController
 
 ## AIM:
-
 To design a unified controller system using Java Interfaces where different gaming consoles implement their own button mappings for actions like Jump, Shoot, and Pause.
 
 ## ALGORITHM :
+1. Define an interface GameController with methods :jump(),shoot(),pause()
 
-Define an interface GameController with methods :jump(),shoot(),pause()
+2. Create class PlayBoxController implementing the interface and defining console-specific button actions.
 
-Create class PlayBoxController implementing the interface and defining console-specific button actions.
+3. Create class XCubeController implementing the interface with its own button mapping.
 
-Create class XCubeController implementing the interface with its own button mapping.
+4. Create class RetroFunController implementing the interface using classic button controls.
 
-Create class RetroFunController implementing the interface using classic button controls.
+5. Create one controller object at a time.
 
-Create one controller object at a time.
+6. Call the three methods (jump, shoot, pause) to demonstrate polymorphism.
 
-Call the three methods (jump, shoot, pause) to demonstrate polymorphism.
 
 
 
@@ -37,13 +41,12 @@ Call the three methods (jump, shoot, pause) to demonstrate polymorphism.
 /*
 Program to implement a Interface using Java
 Developed by: ARUNRAJ R
-RegisterNumber: 212224110006 
+RegisterNumber: 212224110006
 */
 ```
 
 ## SOURCE CODE:
-
-
+```java
 import java.util.*;
 
 interface GameController {
@@ -127,15 +130,17 @@ public class GameInputSimulator {
     }
 }
 
+```
 
 
 
 
 ## OUTPUT:
-
-<img width="911" height="290" alt="image" src="https://github.com/user-attachments/assets/bcc5c23f-44ff-4802-aea2-84e2acfdbfb4" />
+<img width="821" height="293" alt="image" src="https://github.com/user-attachments/assets/77adba3b-7948-47f4-a6ed-f87b7e0eb83b" />
 
 
 ## RESULT:
 Therefore the program successfully unifies different gaming controllers using a common interface.
+
+
 
